@@ -17,8 +17,10 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Use Heroku deployed db or local db
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/young-sea", {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
   useFindAndModify: false
 });
 
@@ -28,5 +30,5 @@ app.use(require("./routes/html.js"));
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`App running on port ${PORT}!`);
+  console.log(`App running on port ${PORT}!`);
 });
