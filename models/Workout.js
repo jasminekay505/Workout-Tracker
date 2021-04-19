@@ -34,16 +34,18 @@ const WorkoutSchema = new Schema({
         distance: {
             type: Number
         }
-    }]
+    }],
+
 });
 
-WorkoutSchema.methods.totalDuration = function () { 
-    this.totalDuration =  this.exercises.reduce(
-        (total, exercise) => total + exercise.duration, 0
-    );
-    return this.totalDuration;
-};
-
 const Workout = mongoose.model("Workout", WorkoutSchema);
+
+Workout.aggregate([
+    {
+        $addFields: {
+            totalDuration: { $sum: "$exercises.duration" }
+        }
+    }
+])
 
 module.exports = Workout;
