@@ -4,7 +4,7 @@ const Workout = require("../models/Workout.js");
 //Get all workouts from db
 router.get('/api/workouts', (req, res) => {
     Workout.find({})
-        .sort({ day: -1 })
+        .sort({ day: 1 })
         .then(dbWorkout => {
             res.json(dbWorkout)
         })
@@ -49,7 +49,7 @@ router.post('/api/workouts', ({ body }, res) => {
 //Get workouts in 7 day range
 router.get('/api/workouts/range', (req, res) => {
     Workout.find({})
-        .sort({ day: -1 })
+        .sort({ day: 1 })
         .limit(7)
         .then(dbWorkout => {
             res.json(dbWorkout)
